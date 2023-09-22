@@ -1,0 +1,6 @@
+.form-container {
+    display: flex;          /* Use flex display */
+    flex-direction: column; /* Display elements in a column layout */
+    //gap: 0px;              /* Optional: Add spacing between form fields */
+    width: 100%;
+  }

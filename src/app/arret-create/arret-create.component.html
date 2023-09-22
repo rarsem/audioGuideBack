@@ -1,0 +1,161 @@
+<mat-toolbar color="primary">
+    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" viewBox="0 0 100 100">
+        <!-- Map marker body -->
+        <circle cx="50" cy="50" r="40" fill="#009688" />
+      
+        <!-- Map marker pin -->
+        <path d="M50 10 L50 50 L60 60 L50 70 L40 60 L50 50 Z" fill="#FF5722" />
+      
+        <!-- Walking figure body -->
+        <circle cx="35" cy="80" r="5" fill="#FFC107" />
+        <path d="M35 80 L35 65" stroke="#FFC107" stroke-width="2" />
+        <path d="M35 65 L30 60" stroke="#FFC107" stroke-width="2" />
+        <path d="M35 65 L40 60" stroke="#FFC107" stroke-width="2" />
+      
+        <!-- Text -->
+        <text x="50%" y="90%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#222">
+          Walking Tours
+        </text>
+      </svg>
+    <span class="example-spacer"></span>
+    <button mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>notifications</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>account_circle</mat-icon>
+    </button>
+</mat-toolbar>
+<div class="content">
+    <div style="display: flex;  justify-content: center; align-items: center;">
+        <h2>{{ isEditMode ? 'Edit a' : 'Create a New'}} Arret</h2>
+        <span class="example-spacer"></span>
+        <button mat-stroked-button color="primary" (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon> Back
+        </button>    
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #arretForm="ngForm" enctype="multipart/form-data">
+        <mat-grid-list cols="2" class="grid-container">
+          <!-- Grid tiles go here -->
+          <mat-grid-tile class="test">
+            <div class="grid-item">
+                <p>Enter Circuit information :</p>
+                <!-- Title -->
+                <mat-form-field style="width:100%">
+                  <mat-label>Title</mat-label>
+                  <input matInput placeholder="Title" [(ngModel)]="newArret.title" name="title" required>
+                </mat-form-field>
+                
+                <!-- Description -->
+                <mat-form-field style="width:100%">
+                  <mat-label>Description</mat-label>
+                  <textarea matInput placeholder="Description" [(ngModel)]="newArret.description" name="description" required></textarea>
+                </mat-form-field>
+
+                <!-- Image -->
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input
+                      type="file"
+                      id="image"
+                      name="fileImage"
+                      (change)="onImageSelected($event)"
+                      accept=".jpg, .png, .jpeg"
+                    />
+                </div>
+                  
+                <!-- Image Preview -->
+                <div class="image-preview">
+                <img *ngIf="existingImageUrl"  [src]="existingImageUrl" alt="Existing Image" />
+                </div>
+
+                <input type="file"  (change)="onFileSelected($event)" #fileInput>
+                <audio controls [src]="audioPath" #audioPlayer></audio>
+              
+            </div>
+
+          </mat-grid-tile>
+          <mat-grid-tile style="align-items: start;">
+            <div class="grid-item">
+                <p>Enter Circuit Geolocalisation : 
+                  <small> click on the map to choose circuit area</small> 
+                </p>
+                <div class="form-container">
+                    <div class="form-field">
+                        <!-- Latitude -->
+                        <mat-form-field appearance="fill" style="width:100%">
+                            <mat-label>Latitude</mat-label>
+                            <input matInput type="text" [(ngModel)]="newArret.mapContent.lat" placeholder="Latitude" [ngModelOptions]="{ standalone: true }" [readonly]="readonlyMode" required/>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-field">
+                        <!-- Longitude -->
+                        <mat-form-field appearance="fill" style="width:100%">
+                            <mat-label>Longitude</mat-label>
+                            <input matInput type="text" [(ngModel)]="newArret.mapContent.lng" placeholder="Longitude" [ngModelOptions]="{ standalone: true }" [readonly]="readonlyMode" required />
+                        </mat-form-field>
+                    </div>
+                    <!-- Circular button for adding -->
+                    <button mat-icon-button color="primary" type="button" (click)="addMapContent()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+
+                    <!-- Circular button for deleting -->
+                    <button mat-icon-button color="warn" type="button" (click)="clearMapContent()">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+              <div>
+                <mat-card class="example-card">
+                    <mat-card-header>
+                      <mat-card-title>Destinations</mat-card-title>
+                      <mat-card-subtitle>Choose a sepecific destinations</mat-card-subtitle>
+                      <button mat-icon-button type="button" (click)="addDestination()">
+                        <mat-icon>add</mat-icon>
+                      </button>
+                    </mat-card-header>
+                    <mat-card-content>
+                      <!-- Card content goes here -->
+                        <div *ngFor="let item of specificDestinations; let i = index ">
+                            <mat-form-field>
+                                <mat-label>Latitude</mat-label>
+                                <input matInput placeholder="Latitude" [value]="item.lat" [readonly]="readonlyMode">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Longitude</mat-label>
+                                <input matInput placeholder="Longitude" [value]="item.lng" [readonly]="readonlyMode">
+                            </mat-form-field>
+                             <!-- Circular button for deleting -->
+                            <button mat-icon-button type="button" color="warn" (click)="removeDestination(i)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                       
+                    </mat-card-content>
+                </mat-card>
+                <!-- <div id="mapContainer" style="width: 620px; height: 400px;"></div> -->
+
+              <!-- loading.component.html -->
+                <!-- <div class="loading-overlay" *ngIf="loading">
+                    <div class="loading-spinner"></div>
+                    <div class="loading-text">Loading Map...</div>
+                </div> -->
+              </div>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <div class="saveBtn">
+            <span class="example-spacer"></span>
+            <button mat-raised-button color="primary" type="submit" [disabled]="arretForm.invalid">{{ isEditMode ? 'Edit' : 'Create'}} Arret</button>
+        </div>
+    </form>
+</div>
+
+<footer class="footer">
+    <p>&copy; 2023 Waling Tours App</p>
+    <!-- Other footer information goes here -->
+</footer>
+

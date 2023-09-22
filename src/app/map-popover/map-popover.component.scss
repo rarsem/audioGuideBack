@@ -1,0 +1,26 @@
+/* Create a container div with flex display */
+.container {
+    display: flex;
+    height: 100%; /* Set the container height to 100% */
+    width: 100%; /* Set the container width to 100% */
+    min-height: 300px;
+}
+
+/* Create two child divs that are side by side */
+.child {
+    flex: 1; /* Make the child divs equally share the available space */
+    border: 1px solid #ccc; /* Add a border for visibility */
+    padding: 10px; /* Add some padding for spacing */
+}
+
+/* Style the first child div */
+.child:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f0f0; /* Set background color for the first child */
+}
+
+/* Style the second child div */
+.child:nth-child(2) {
+    background-color: #e0e0e0; /* Set background color for the second child */
+}
