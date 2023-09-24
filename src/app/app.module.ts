@@ -13,6 +13,7 @@ import { CircuitCreateComponent } from './circuit-create/circuit-create.componen
 import { ArretCreateComponent } from './arret-create/arret-create.component';
 import { ArretListComponent } from './arret-list/arret-list.component';
 import { MapPopoverComponent } from './map-popover/map-popover.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -24,7 +25,8 @@ import { MapPopoverComponent } from './map-popover/map-popover.component';
     CircuitCreateComponent,
     ArretCreateComponent,
     ArretListComponent,
-    MapPopoverComponent
+    MapPopoverComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

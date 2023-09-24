@@ -4,10 +4,13 @@ import { CircuitListComponent } from './circuit-list/circuit-list.component'; //
 import { CircuitCreateComponent } from './circuit-create/circuit-create.component';
 import { ArretCreateComponent } from './arret-create/arret-create.component';
 import { ArretListComponent } from './arret-list/arret-list.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard' ; // Update the path as needed
 
 const routes: Routes = [
-  { path: '', redirectTo: '/circuits', pathMatch: 'full' }, // Redirect to /circuits by default
-  { path: 'circuits', component: CircuitListComponent }, // Route to Circuit List component
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect to /circuits by default
+  { path: 'login', component: LoginComponent },
+  { path: 'circuits', component: CircuitListComponent, canActivate: [AuthGuard]}, // Route to Circuit List component
   // Add more routes as needed
   { path: 'create-circuit', component: CircuitCreateComponent },
   { path: 'edit-circuit/:id', component: CircuitCreateComponent },
@@ -15,7 +18,6 @@ const routes: Routes = [
   { path: 'arrets', component: ArretListComponent },
   { path: 'arrets/:idCircuit', component: ArretListComponent },
   { path: 'edit-arret/:idCircuit/:id', component: ArretCreateComponent }
-
 ];
 
 @NgModule({
