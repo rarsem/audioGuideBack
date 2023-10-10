@@ -1,23 +1,34 @@
-import { Component } from '@angular/core';
+
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
-  
-  username: string = '';
-  password: string = '';
+  hide = true;
+  isLoading = false
+  isAuthenticated: boolean = false;
 
-  constructor(private authService : AuthService){}
+  constructor(public authService : AuthService) {}
 
-  onLogin(): void {
-     // Call the login method from the authentication service
-  this.authService.login(this.username, this.password);
-    // Perform authentication logic here
-    // Example: Make an HTTP request to your backend service
+  onLogin(form : NgForm){
+      if(form.invalid) return;
+      this.isLoading = true;
+      this.authService.login(form.value.email , form.value.password)
   }
+  ngOnInit(){
+      // this.authStatusSub = this.authService.getAuthStatusListner().subscribe(authStatus=>{
+      //     this.isLoading = false
+      // })
+      
+  }
+
+  // ngOnDestroy(){
+  //     this.authStatusSub.unsubscribe()
+  // }
 }

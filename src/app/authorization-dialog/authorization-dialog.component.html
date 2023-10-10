@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Authorization Action Confirmation</h2>
+<mat-dialog-content>
+  <p>Do you want to validate this authorization?</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">Cancel</button>
+  <button mat-button (click)="isChecked()" cdkFocusInitial>Confirm</button>
+</mat-dialog-actions>

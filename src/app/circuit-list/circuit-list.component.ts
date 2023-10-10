@@ -3,6 +3,8 @@ import { CircuitService } from '../services/circuit.service';
 import { Router } from '@angular/router'; // Import the Router module
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../services/auth.service';
+import { Subscription } from 'rxjs';
 
 
 export interface circuitElement {
@@ -20,14 +22,23 @@ export interface circuitElement {
 export class CircuitListComponent implements OnInit {
   circuits: any[] = [];
   searchText: string = ''; // For search input
+  private authStatusSub! : Subscription;
+  isAuthenticated: boolean = false;
 
   displayedColumns: string[] = ['demo-image', 'demo-title', 'demo-city', 'demo-country','demo-actions' ];
 
-
   constructor(private circuitService: CircuitService, private router: Router,
-    private snackBar: MatSnackBar) {}
+    private snackBar: MatSnackBar, 
+    private authService : AuthService) {}
 
   ngOnInit(): void {
+
+    this.isAuthenticated = this.authService.isAuthenticated();
+
+  //   this.authStatusSub = this.authService.getAuthStatusListner().subscribe((authStatus : any) => {
+  //     //this.isLoading = false;
+  // })
+
     this.getCircuits();
   }
 
@@ -91,6 +102,10 @@ export class CircuitListComponent implements OnInit {
   clearSearch() {
     this.searchText = '';
     // Reset the 'circuits' array to show all circuits
+  }
+  ngOnDestroy(){
+    //this.postsSub.unsubscribe();
+    //this.authStatusSub.unsubscribe();
   }
   
 }

@@ -1,51 +1,7 @@
-<mat-toolbar color="primary">
-    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" viewBox="0 0 100 100">
-        <!-- Map marker body -->
-        <circle cx="50" cy="50" r="40" fill="#009688" />
-      
-        <!-- Map marker pin -->
-        <path d="M50 10 L50 50 L60 60 L50 70 L40 60 L50 50 Z" fill="#FF5722" />
-      
-        <!-- Walking figure body -->
-        <circle cx="35" cy="80" r="5" fill="#FFC107" />
-        <path d="M35 80 L35 65" stroke="#FFC107" stroke-width="2" />
-        <path d="M35 65 L30 60" stroke="#FFC107" stroke-width="2" />
-        <path d="M35 65 L40 60" stroke="#FFC107" stroke-width="2" />
-      
-        <!-- Text -->
-        <text x="50%" y="90%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#222">
-          Walking Tours
-        </text>
-      </svg>
-    <span class="example-spacer"></span>
-    <button mat-icon-button>
-      <mat-icon>search</mat-icon>
-    </button>
-    <button mat-icon-button>
-      <mat-icon>notifications</mat-icon>
-    </button>
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>account_circle</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>
-        <mat-icon>dialpad</mat-icon>
-        <span>Redial</span>
-      </button>
-      <button mat-menu-item disabled>
-        <mat-icon>voicemail</mat-icon>
-        <span>Check voice mail</span>
-      </button>
-      <button mat-menu-item>
-        <mat-icon>notifications_off</mat-icon>
-        <span>Disable alerts</span>
-      </button>
-    </mat-menu>
-</mat-toolbar>
 <div class="content">
     <mat-toolbar-row>
         <h2>Circuit List</h2>
-        <span class="example-spacer"></span>
+        <span class="spacer"></span>
         <!-- <mat-form-field appearance="fill">
           <mat-label>Search Circuits</mat-label>
           <input matInput type="text" [(ngModel)]="searchText" (input)="onSearch()">

@@ -1,0 +1,68 @@
+<div class="content">
+    <mat-toolbar-row>
+        <h2>Arrets List</h2>
+        <span class="example-spacer"></span>
+        <button mat-stroked-button color="primary" (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon> Back
+        </button> 
+    </mat-toolbar-row>
+    <mat-table #myTable  [dataSource]="authorizedTourist">
+        <!-- Tourist Info Column -->
+        <ng-container matColumnDef="demo-touristInfo">
+          <mat-header-cell *matHeaderCellDef> Tourist Info Header </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.tourist.email }} </mat-cell>
+        </ng-container>
+      
+        <!-- Circuit Info Column -->
+        <ng-container matColumnDef="demo-circuitInfo">
+          <mat-header-cell *matHeaderCellDef> Circuit Info Header </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.circuit.title }} </mat-cell>
+        </ng-container>
+      
+        <!-- Authorized Column -->
+        <ng-container matColumnDef="demo-authorized">
+          <mat-header-cell *matHeaderCellDef> Authorized Header </mat-header-cell>
+          <mat-cell *matCellDef="let element" >
+            <ng-container *ngIf="element.authorized; else notAuthorized">
+              <mat-icon style="color: green">check_circle</mat-icon>
+            </ng-container>
+            <ng-template #notAuthorized>
+              <mat-icon style="color: red" >cancel</mat-icon>
+            </ng-template>
+
+          </mat-cell>
+        </ng-container>
+      
+        <!-- Actions Column -->
+       <!-- Actions Column -->
+       <ng-container matColumnDef="demo-actions">
+        <mat-header-cell *matHeaderCellDef> Actions Header </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <ng-container *ngIf="!element.authorized; else allowAuthorized">
+            <button (click)="openConfirmationDialog(element)">Autoriser l'accès</button>
+          </ng-container>
+          <ng-template #allowAuthorized>
+            <button (click)="openConfirmationDialog(element)">Interdire l'accès </button>
+          </ng-template>
+
+        </mat-cell>
+      </ng-container>
+      
+        <!-- Header Row -->
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      
+        <!-- Row Data -->
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+
+      <mat-paginator
+        [pageSize]="pageSize"
+        [length]="totalItems"
+        (page)="onPageChange($event)"
+      ></mat-paginator>
+
+</div>
+
+<footer class="footer">
+    <p>&copy; 2023 Waling Tours App</p>
+</footer>

@@ -1,16 +1,64 @@
+<!-- <h2>is my first component</h2> -->
 <mat-card>
-    <mat-card-header>
-      <mat-card-title>Login</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form (ngSubmit)="onLogin()">
-        <mat-form-field>
-          <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
-        </mat-form-field>
-        <mat-form-field>
-          <input atInput type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
-        </mat-form-field>
-        <button type="submit" mat-raised-button color="primary">Login</button>
-      </form>
-    </mat-card-content>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form  (submit)="onLogin(loginForm)" #loginForm="ngForm" class="example-form" *ngIf="!isLoading">
+      <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>E-mail</mat-label>
+          <input matInput 
+          placeholder="Ex. exemple@mail.com" 
+          value="" 
+          name="email"
+          ngModel
+          #emailInput="ngModel"
+          required
+          email
+          />
+          <mat-error *ngIf="emailInput.invalid">E-mail is required !!</mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput 
+          placeholder="Password" 
+          [type]="hide ? 'password' : 'text'"
+          value="" 
+          name="password"
+          ngModel
+
+          #passwordInput="ngModel"
+          />
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error *ngIf="passwordInput.invalid">E-mail is required !!</mat-error>
+      </mat-form-field>
+      
+
+      <button 
+          class="saveButton"
+          mat-raised-button 
+          color="primary" 
+          type="submit"
+          *ngIf="!isLoading"
+      >Save me</button>
+
+  </form>
+  
+  <!-- <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="Ex. title" value="" [(ngModel)]="enteredTitle">
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Leave a comment</mat-label>
+      <textarea matInput placeholder="Ex. It makes me feel..." rows="6" [(ngModel)]="enteredContent"></textarea>
+  </mat-form-field> -->
+
+
+
+  <!-- ------------------------------------------------------------------------------- -->
+  <!--  ngModule is a core binding 
+  [value] => to bind value of input # set the value name
+  (click) is the click-->
+  <!-- <button mat-raised-button color="primary" (click)="onAddPost()">Save me</button> -->
 </mat-card>
+
+<!--<hr> -->
+
+<!-- <p>{{ newPost }}</p> -->

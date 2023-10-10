@@ -14,6 +14,10 @@ import { ArretCreateComponent } from './arret-create/arret-create.component';
 import { ArretListComponent } from './arret-list/arret-list.component';
 import { MapPopoverComponent } from './map-popover/map-popover.component';
 import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { HeaderComponent } from './header/header.component';
+import { ListAutorizedComponent } from './list-autorized/list-autorized.component';
+import { AuthorizationDialogComponent } from './authorization-dialog/authorization-dialog.component';
 
 
 
@@ -26,7 +30,11 @@ import { LoginComponent } from './login/login.component';
     ArretCreateComponent,
     ArretListComponent,
     MapPopoverComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent,
+    HeaderComponent,
+    ListAutorizedComponent,
+    AuthorizationDialogComponent
   ],
   imports: [
     BrowserModule,

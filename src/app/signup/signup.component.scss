@@ -5,5 +5,10 @@ mat-form-field {
 mat-card{
     width: 50%;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 50px;
+    padding: 30px;
+}
+
+.spacer {
+    flex: 1 1 auto;
 }

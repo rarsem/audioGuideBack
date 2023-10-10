@@ -91,7 +91,6 @@ goBack(): void {
   this.location.back();
 }
 
-
 ngOnInit(): void {
   const arretId = this.route.snapshot.params['id'];
   const idCircuit = this.route.snapshot.params['idCircuit']
@@ -102,7 +101,7 @@ ngOnInit(): void {
       // Editing an existing circuit
       this.isEditMode = true;
       this.arretService.getArretById(idCircuit,arretId).subscribe((data: Arret) => {
-        console.log(data)
+        //console.log(data)
         this.newArret = data;
         this.existingImageUrl = `${this.baseUrl}/${data.imagePath}`; // Set the existing image URL
         this.audioPath = `${this.baseUrl}/${data.audioPath}`;
@@ -112,7 +111,6 @@ ngOnInit(): void {
         //this.existingImageUrl = `${this.baseUrl}/${data.imagePath}`; // Set the existing image URL
       });
     }
- 
 }
 
 

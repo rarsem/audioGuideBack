@@ -1,0 +1,39 @@
+<!-- <h2>is my first component</h2> -->
+<mat-card>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <h3>Créer un nouveau compte</h3>
+    <form  (submit)="onSignup(signupForm)" #signupForm="ngForm" class="example-form" *ngIf="!isLoading">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>E-mail</mat-label>
+            <input matInput 
+            placeholder="Ex. exemple@mail.com" 
+            value="" 
+            name="email"
+            ngModel
+            #emailInput="ngModel"
+            required
+            email
+            />
+            <mat-error *ngIf="emailInput.invalid">E-mail is required !!</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput 
+            placeholder="Password" 
+            value="" 
+            name="password"
+            ngModel
+            #passwordInput="ngModel"
+            required
+            />
+            <mat-error *ngIf="passwordInput.invalid">E-mail is required !!</mat-error>
+        </mat-form-field>
+        <div class="spacer"></div>
+        <button 
+            class="saveButton"
+            mat-raised-button 
+            color="primary" 
+            type="submit"
+        >Enregister</button>
+    </form>
+</mat-card>
