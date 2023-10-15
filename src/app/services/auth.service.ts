@@ -23,23 +23,8 @@ export class AuthService {
   login(email: string, password: string) {
 
     const authdata : AuthData  = { email : email , password : password} 
-        this.http.post<{token : string, expiresIn : number}>(BACKEND_URL+"/login" , authdata)
-        .subscribe( (response : any )=> {
-              console.log(response)
-              if (response.token) {
-                // Store the token in local storage
-                localStorage.setItem('token', response.token);
-                // Store token expiration timestamp (adjust as needed)
-                const expirationTime = new Date().getTime() + response.expiresIn * 1000;
-                localStorage.setItem('tokenExpiration', expirationTime.toString());
-      
-                // Redirect to /circuits after successful login
-                this.router.navigate(['/circuits']);
-              }
-           
-        }, (error : any ) => {
-          return of(error);        
-        })
+    return  this.http.post<{token : string, expiresIn : number}>(BACKEND_URL+"/login" , authdata)
+        
   }
 
   createUser(email: string, password: string) {

@@ -18,27 +18,38 @@
         </text>
       </svg>
     <span class="spacer"></span>
-    <button mat-icon-button>
+    <!-- <button mat-icon-button>
       <mat-icon>search</mat-icon>
-    </button>
-    <button mat-icon-button>
+    </button> -->
+    <!-- <button mat-icon-button>
       <mat-icon>notifications</mat-icon>
-    </button>
+    </button> -->
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+      <!-- Profile Information -->
       <button mat-menu-item>
-        <mat-icon>dialpad</mat-icon>
-        <span>Redial</span>
+        <mat-icon>account_circle</mat-icon>
+        <span>Profile Information</span>
       </button>
-      <button mat-menu-item disabled>
-        <mat-icon>voicemail</mat-icon>
-        <span>Check voice mail</span>
-      </button>
+    
+      <!-- Add New Admin -->
       <button mat-menu-item>
-        <mat-icon>notifications_off</mat-icon>
-        <span>Disable alerts</span>
+        <mat-icon>person_add</mat-icon>
+        <span>Add New Admin</span>
+      </button>
+    
+      <!-- List of Admins -->
+      <button mat-menu-item>
+        <mat-icon>people</mat-icon>
+        <span>List of Admins</span>
+      </button>
+    
+      <!-- Log Out -->
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Log Out</span>
       </button>
     </mat-menu>
 </mat-toolbar>

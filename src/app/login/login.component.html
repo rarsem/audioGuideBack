@@ -1,5 +1,5 @@
 <!-- <h2>is my first component</h2> -->
-<mat-card>
+<mat-card class="loginCard">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form  (submit)="onLogin(loginForm)" #loginForm="ngForm" class="example-form" *ngIf="!isLoading">
       <mat-form-field class="example-full-width" appearance="fill">
@@ -37,7 +37,7 @@
           color="primary" 
           type="submit"
           *ngIf="!isLoading"
-      >Save me</button>
+      >Login</button>
 
   </form>
   
