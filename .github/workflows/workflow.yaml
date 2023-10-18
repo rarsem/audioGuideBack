@@ -3,7 +3,7 @@ name: Angular CI/CD
 on:
   push:
     branches:
-      - master # Replace with your main branch name
+      - master # Replace with your main branch nam
 
 jobs:
   build:
