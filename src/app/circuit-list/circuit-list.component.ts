@@ -6,6 +6,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
 
+import {environment}  from "src/environments/environment"
+
 
 export interface circuitElement {
   titre: string;
@@ -26,6 +28,9 @@ export class CircuitListComponent implements OnInit {
   isAuthenticated: boolean = false;
 
   displayedColumns: string[] = ['demo-image', 'demo-title', 'demo-city', 'demo-country','demo-actions' ];
+
+  baseUrl = environment.apiUrl;
+
 
   constructor(private circuitService: CircuitService, private router: Router,
     private snackBar: MatSnackBar, 

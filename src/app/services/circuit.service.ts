@@ -9,12 +9,11 @@ import { tap } from 'rxjs/operators';
 import {environment}  from "src/environments/environment"
 
 
-const BACKEND_URL = environment.apiUrl + "/circuits"
+const BACKEND_URL = environment.apiUrl + "/api/circuits"
 @Injectable({
   providedIn: 'root'
 })
 export class CircuitService {
-  private baseUrl = 'http://localhost:3000'; // Replace with your server URL
   //private apiUrl = '/api/circuits'; // Replace with your API endpoint
   circuits: Circuit[] = []; // Ensure 'Circuit' is the correct type
 

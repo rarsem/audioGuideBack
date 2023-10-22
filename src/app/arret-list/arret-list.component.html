@@ -11,7 +11,7 @@
         <ng-container matColumnDef="demo-image">
           <th mat-header-cell *matHeaderCellDef> No.Image </th>
           <td mat-cell *matCellDef="let element" style="height: 110px;padding:5px;"> 
-            <img [src]="'http://localhost:3000/' + element.imagePath " width="150px"/> </td>
+            <img [src]="baseUrl + '/' + element.imagePath " width="150px"/> </td>
         </ng-container>
       
         <!-- Name Column -->

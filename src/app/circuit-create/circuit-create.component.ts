@@ -7,6 +7,8 @@ import { Location } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { MapPopoverComponent } from '../map-popover/map-popover.component';
 
+import {environment}  from "src/environments/environment"
+
 @Component({
   selector: 'app-circuit-create',
   templateUrl: './circuit-create.component.html',
@@ -19,11 +21,12 @@ export class CircuitCreateComponent implements OnInit {
     mapContent: {} as { lat: number; lng: number }, // Assertion de type
   } as Circuit;
 
+
   isEditMode: boolean = false;
   languageOptions: string[] = ['Français', 'Anglais', 'Arabe'];
   selectedImage: File | undefined;
   existingImageUrl: string | null = null; // Initialisez-le à null
-  private baseUrl = 'http://localhost:3000';
+  baseUrl = environment.apiUrl;
 
   readonlyMode: boolean = true;
 
