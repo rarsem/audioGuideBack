@@ -10,6 +10,9 @@ import { MapPopoverComponent } from '../map-popover/map-popover.component';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import {environment}  from "src/environments/environment"
+
+
 @Component({
   selector: 'app-arret-create',
   templateUrl: './arret-create.component.html',
@@ -32,7 +35,7 @@ selectedImage: File | undefined;
 audioFile : File | undefined;
 existingImageUrl: string | null = null; // Initialize as null
 audioPath : string | null = null;
-private baseUrl = 'http://localhost:3000';
+private baseUrl = environment.apiUrl;
 
 
 

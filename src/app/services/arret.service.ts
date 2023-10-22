@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators';
 import {environment}  from "src/environments/environment"
 
 
-const BACKEND_URL = environment.apiUrl + "/arrets"
+const BACKEND_URL = environment.apiUrl + "/api/arrets"
 
 
 @Injectable({
@@ -17,8 +17,6 @@ const BACKEND_URL = environment.apiUrl + "/arrets"
 })
 export class ArretService {
 
-  private baseUrl = 'http://localhost:3000'; // Replace with your server URL
-  //private apiUrl = '/api/circuits'; // Replace with your API endpoint
   arrets: Arret[] = []; // Ensure 'Circuit' is the correct type
 
   constructor(private http: HttpClient , private dialog: MatDialog) {}

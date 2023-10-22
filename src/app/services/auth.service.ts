@@ -8,14 +8,13 @@ import { AuthData } from "src/app/signup/auth-data.model"
 
 import {environment}  from "src/environments/environment"
 
-const BACKEND_URL = environment.apiUrl + "/user"
+const BACKEND_URL = environment.apiUrl + "/api/user"
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api'; // Replace with your API endpoint
 
   constructor(private http: HttpClient, private router: Router) {}
 

@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { Arret } from '../model/arret.model';
 
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import {environment}  from "src/environments/environment"
 
 
 @Component({
@@ -27,6 +28,7 @@ export class ArretListComponent implements OnInit  {
   pageSize = 10; // Number of items per page
   totalItems = 0; // Total number of items from your data source
 
+  baseUrl = environment.apiUrl;
 
   constructor(
     private arretService: ArretService, 

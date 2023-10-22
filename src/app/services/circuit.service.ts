@@ -9,12 +9,11 @@ import { tap } from 'rxjs/operators';
 import {environment}  from "src/environments/environment"
 
 
-const BACKEND_URL = environment.apiUrl + "/circuits"
+const BACKEND_URL = environment.apiUrl + "/api/circuits"
 @Injectable({
   providedIn: 'root'
 })
 export class CircuitService {
-  private baseUrl = 'http://localhost:3000'; // Replace with your server URL
   //private apiUrl = '/api/circuits'; // Replace with your API endpoint
   circuits: Circuit[] = []; // Ensure 'Circuit' is the correct type
 
@@ -28,7 +27,7 @@ export class CircuitService {
   // Method to fetch circuits data from the API
   getCircuits(): Observable<{ message: string, circuits: any[], maxPost: number }> {
     // Make the HTTP GET request and update the circuits data
-    return this.http.get<{ message: string, circuits: any[], maxPost: number }>(`${this.baseUrl}/api/circuits`)
+    return this.http.get<{ message: string, circuits: any[], maxPost: number }>(`${BACKEND_URL}/api/circuits`)
       .pipe(
         tap(response => {
           // Update the circuits data when the response is received

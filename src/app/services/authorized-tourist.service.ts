@@ -8,12 +8,11 @@ import { tap } from 'rxjs/operators';
 
 import {environment}  from "src/environments/environment"
 
-const BACKEND_URL = environment.apiUrl + "/grant-authorization"
+const BACKEND_URL = environment.apiUrl + "/api/grant-authorization"
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorizedTouristService {
-  private baseUrl = 'http://localhost:3000'; // Replace with your server URL
 
   authorizedTourist: any[] = []; // Ensure 'Circuit' is the correct type
 
