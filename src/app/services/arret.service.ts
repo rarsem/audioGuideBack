@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators';
 import {environment}  from "src/environments/environment"
 
 
-const BACKEND_URL = environment.apiUrl + "/api/arrets"
+const BACKEND_URL = environment.apiUrl + "/arrets"
 
 
 @Injectable({
