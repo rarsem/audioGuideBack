@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
 
 import {environment}  from "src/environments/environment"
 
-const BACKEND_URL = environment.apiUrl + "/user"
+const BACKEND_URL = environment.apiUrl + "/api/grant-authorization"
 @Injectable({
   providedIn: 'root'
 })
@@ -19,11 +19,10 @@ export class AuthorizedTouristService {
 
   constructor(private http: HttpClient) {}
 
-
   // Method to fetch circuits data from the API
   getGrantAuth(pageIndex: number, pageSize: number): Observable<{ items: any[]; totalItems: number }> {
     // Make the HTTP GET request and update the circuits data
-    const url = `${this.baseUrl}/api/grant-authorization?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+    const url = `${BACKEND_URL}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
     return this.http.get<{ items: any[]; totalItems: number }>(url)
       .pipe(
         tap(response => {
@@ -33,7 +32,7 @@ export class AuthorizedTouristService {
       );
   }
   toggleAuthorization(id: string) {
-    const url = `${this.baseUrl}/api/grant-authorization/${id}`;
+    const url = `${BACKEND_URL}/${id}`;
     return this.http.put(url, {});
   }
 }

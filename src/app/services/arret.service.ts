@@ -6,6 +6,11 @@ import { CircuitDialogComponent } from '../circuit-dialog/circuit-dialog.compone
 import { Arret } from '../model/arret.model';
 import { tap } from 'rxjs/operators';
 
+import {environment}  from "src/environments/environment"
+
+
+const BACKEND_URL = environment.apiUrl + "/api/arrets"
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +31,7 @@ export class ArretService {
   // Method to fetch circuits data from the API
   getArrets(pageIndex: number, pageSize: number): Observable<{ items: any[]; totalItems: number }> {
     // Make the HTTP GET request and update the circuits data
-    const url = `${this.baseUrl}/api/arrets?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+    const url = `${BACKEND_URL}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
     console.log(url);
     return this.http.get<{ items: any[]; totalItems: number }>(url)
       .pipe(
@@ -42,7 +47,7 @@ export class ArretService {
   getArretsByCircuitId(circuitId: string , pageIndex: number, pageSize: number): Observable<{ items: any[]; totalItems: number }> {
     //const url = `${this.baseUrl}/api/arrets/${circuitId}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
    // Make the HTTP GET request and update the circuits data
-   const url = `${this.baseUrl}/api/arrets/${circuitId}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+   const url = `${BACKEND_URL}/${circuitId}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
    return this.http.get<{ items: any[]; totalItems: number }>(url)
      .pipe(
        tap(response => {
@@ -54,14 +59,14 @@ export class ArretService {
 
   // Add a method to get a arret by ID
   getArretById(idCircuit : string, arretId: string): Observable<Arret> {
-    const url = `${this.baseUrl}/api/arrets/${idCircuit}/${arretId}`;
+    const url = `${BACKEND_URL}/${idCircuit}/${arretId}`;
     return this.http.get<Arret>(url);
   }
   
   // Method to create a new circuit
   createArret(arretData: any): Observable<any> {
     //console.log(arretData);
-    return this.http.post(`${this.baseUrl}/api/arrets`, arretData);
+    return this.http.post(BACKEND_URL, arretData);
     
   }
 
@@ -90,11 +95,11 @@ export class ArretService {
   // }
 
   removeArret(id: string): Observable<any>  {
-    return this.http.delete(`${this.baseUrl}/api/arrets/${id}`)
+    return this.http.delete(`${BACKEND_URL}/${id}`)
   }
 
   updateArret(arretId: string, updatedArret: any): Observable<any> {
-    const url = `${this.baseUrl}/api/arrets/${arretId}`;
+    const url = `${BACKEND_URL}/${arretId}`;
     console.log(updatedArret)
     return this.http.put(url, updatedArret);
   }

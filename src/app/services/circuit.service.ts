@@ -6,6 +6,10 @@ import { CircuitDialogComponent } from '../circuit-dialog/circuit-dialog.compone
 import { Circuit } from '../model/circuit.model';
 import { tap } from 'rxjs/operators';
 
+import {environment}  from "src/environments/environment"
+
+
+const BACKEND_URL = environment.apiUrl + "/api/circuits"
 @Injectable({
   providedIn: 'root'
 })
@@ -34,7 +38,7 @@ export class CircuitService {
   }
   // Method to create a new circuit
   createCircuit(circuitData: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/api/circuits`, circuitData);
+    return this.http.post(BACKEND_URL, circuitData);
   }
 
   openRemoveDialog(circuit: any): void {
@@ -57,17 +61,17 @@ export class CircuitService {
 
   // Add a method to get a circuit by ID
   getCircuitById(circuitId: string): Observable<Circuit> {
-    const url = `${this.baseUrl}/api/circuits/${circuitId}`;
+    const url = `${BACKEND_URL}/${circuitId}`;
     return this.http.get<Circuit>(url);
   }
 
   removeCircuit(circuit: any): Observable<any>  {
     const circuitId = circuit._id; // Replace with the appropriate property for circuit ID
-    return this.http.delete(`${this.baseUrl}/api/circuits/${circuitId}`)
+    return this.http.delete(`${BACKEND_URL}/${circuitId}`)
   }
 
   updateCircuit(circuitId: string, updatedCircuit: any): Observable<any> {
-    const url = `${this.baseUrl}/api/circuits/${circuitId}`;
+    const url = `${BACKEND_URL}/${circuitId}`;
     return this.http.put(url, updatedCircuit);
   }
 }
