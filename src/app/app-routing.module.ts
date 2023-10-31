@@ -14,14 +14,14 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'circuits', component: CircuitListComponent, canActivate: [AuthGuard]},
   // Add more routes as needed
-  { path: 'create-circuit', component: CircuitCreateComponent },
-  { path: 'edit-circuit/:id', component: CircuitCreateComponent },
-  { path: 'create-arret/:idCircuit', component: ArretCreateComponent },
-  { path: 'arrets', component: ArretListComponent },
-  { path: 'arrets/:idCircuit', component: ArretListComponent },
-  { path: 'edit-arret/:idCircuit/:id', component: ArretCreateComponent },
-  {path  : 'signup' , component :  SignupComponent,},
-  {path  : 'list-authorized' , component :  ListAutorizedComponent,}
+  { path: 'create-circuit', component: CircuitCreateComponent , canActivate: [AuthGuard] },
+  { path: 'edit-circuit/:id', component: CircuitCreateComponent , canActivate: [AuthGuard] },
+  { path: 'create-arret/:idCircuit', component: ArretCreateComponent , canActivate: [AuthGuard] },
+  { path: 'arrets', component: ArretListComponent  , canActivate: [AuthGuard]},
+  { path: 'arrets/:idCircuit', component: ArretListComponent , canActivate: [AuthGuard] },
+  { path: 'edit-arret/:idCircuit/:id', component: ArretCreateComponent , canActivate: [AuthGuard] },
+  { path  : 'signup' , component :  SignupComponent,},
+  { path  : 'list-authorized' , component :  ListAutorizedComponent , canActivate: [AuthGuard]}
   
 ];
 

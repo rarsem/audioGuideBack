@@ -1,29 +1,49 @@
 <mat-drawer-container class="example-container" >
   <mat-drawer #drawer [mode]="'side'">
+    <div class="contentLogo">
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" viewBox="0 0 100 100">
-      <!-- Map marker body -->
-      <circle cx="50" cy="50" r="40" fill="#009688" />
-    
-      <!-- Map marker pin -->
-      <path d="M50 10 L50 50 L60 60 L50 70 L40 60 L50 50 Z" fill="#FF5722" />
-    
-      <!-- Walking figure body -->
-      <circle cx="35" cy="80" r="5" fill="#FFC107" />
-      <path d="M35 80 L35 65" stroke="#FFC107" stroke-width="2" />
-      <path d="M35 65 L30 60" stroke="#FFC107" stroke-width="2" />
-      <path d="M35 65 L40 60" stroke="#FFC107" stroke-width="2" />
-    
-      <!-- Text -->
-      <text x="50%" y="90%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#222">
-        Walking Tours
-      </text>
-    </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" viewBox="0 0 100 100">
+        <!-- Map marker body -->
+        <circle cx="50" cy="50" r="40" fill="#009688" />
+      
+        <!-- Map marker pin -->
+        <path d="M50 10 L50 50 L60 60 L50 70 L40 60 L50 50 Z" fill="#FF5722" />
+      
+        <!-- Walking figure body -->
+        <circle cx="35" cy="80" r="5" fill="#FFC107" />
+        <path d="M35 80 L35 65" stroke="#FFC107" stroke-width="2" />
+        <path d="M35 65 L30 60" stroke="#FFC107" stroke-width="2" />
+        <path d="M35 65 L40 60" stroke="#FFC107" stroke-width="2" />
+      
+        <!-- Text -->
+        <text x="50%" y="90%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#222">
+          Walking Tours
+        </text>
+      </svg>
 
-    <mat-nav-list style="width: 250px;">
+    </div>
+   
+
+    <mat-nav-list style="width: 280px;">
       <!-- <a mat-list-item routerLink="/home">Home</a> -->
-      <a mat-list-item routerLink="/circuits">List des circuits</a>
-      <a mat-list-item routerLink="/list-authorized">Demandes d'autorisations</a>
+      
+      <mat-list-item routerLink="/circuits" >
+        <div class="menuItem">
+          <i class="material-icons">wallet_travel</i>
+          <span>List des circuits</span>
+        </div></mat-list-item>
+        <mat-list-item routerLink="/arrets" >
+          <div class="menuItem">
+            <i class="material-icons">edit_location</i>
+            <span>List des arrets</span>
+          </div></mat-list-item>
+
+      <mat-list-item routerLink="/list-authorized">
+        <div class="menuItem">
+          <i class="material-icons">checklist</i>
+          <span>Demandes d'autorisation</span>
+        </div>
+      </mat-list-item>
     </mat-nav-list>
 
   </mat-drawer>
