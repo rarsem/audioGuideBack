@@ -104,12 +104,17 @@ ngOnInit(): void {
       // Editing an existing circuit
       this.isEditMode = true;
       this.arretService.getArretById(idCircuit,arretId).subscribe((data: Arret) => {
-        //console.log(data)
+        console.log(data)
         this.newArret = data;
         this.existingImageUrl = `${this.baseUrl}/${data.imagePath}`; // Set the existing image URL
         this.audioPath = `${this.baseUrl}/${data.audioPath}`;
-        this.specificDestinations = data.specificDestinations
+        this.specificDestinations = data.specificDestinations.map(item=>{
+          let value = item.split(',')
+
+          return {lat : value[0] , lng : value[1]}
+        })
         //console.log(data)
+        console.log(this.specificDestinations)
         //let {mapContent} = this.newCircuit
         //this.existingImageUrl = `${this.baseUrl}/${data.imagePath}`; // Set the existing image URL
       });
@@ -141,7 +146,7 @@ onSubmit() {
   formData.append('mapContentLng', this.newArret.mapContent.lng.toString());
   const circuitId = this.route.snapshot.params['idCircuit'];
   formData.append('idCircuit', circuitId);
-
+console.log(this.specificDestinations)
   for (const value of this.specificDestinations) {
     formData.append('specificDestinations', `${value.lat},${value.lng}`);
   }
@@ -251,6 +256,7 @@ addDestination(): void {
 
   dialogRef.afterClosed().subscribe((result) => {
     if (result) {
+      console.log(result)
       //.mapContentLat = result.latitude;
       //this.mapContentLng = result.longitude;
       this.specificDestinations.push({lat : result.latitude, lng : result.longitude })
@@ -285,7 +291,21 @@ clearMapContent() : void{
 }
 
 removeDestination(index : number): void {
-  this.specificDestinations.splice(index, 1);
+
+
+  const specificDestinations = this.specificDestinations
+  
+  const indexToRemove = index; // Index of the object you want to remove
+  
+  if (indexToRemove >= 0 && indexToRemove < specificDestinations.length) {
+    specificDestinations.splice(indexToRemove, 1);
+  } else {
+    console.error('Invalid index');
+  }
+  
+  this.specificDestinations = [...specificDestinations]
+
+  console.log(this.specificDestinations)
 }
 
 }

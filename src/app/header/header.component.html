@@ -1,55 +1,80 @@
-<mat-toolbar color="primary">
+<mat-drawer-container class="example-container" >
+  <mat-drawer #drawer [mode]="'side'">
+
     <svg xmlns="http://www.w3.org/2000/svg" width="120" height="60" viewBox="0 0 100 100">
-        <!-- Map marker body -->
-        <circle cx="50" cy="50" r="40" fill="#009688" />
+      <!-- Map marker body -->
+      <circle cx="50" cy="50" r="40" fill="#009688" />
+    
+      <!-- Map marker pin -->
+      <path d="M50 10 L50 50 L60 60 L50 70 L40 60 L50 50 Z" fill="#FF5722" />
+    
+      <!-- Walking figure body -->
+      <circle cx="35" cy="80" r="5" fill="#FFC107" />
+      <path d="M35 80 L35 65" stroke="#FFC107" stroke-width="2" />
+      <path d="M35 65 L30 60" stroke="#FFC107" stroke-width="2" />
+      <path d="M35 65 L40 60" stroke="#FFC107" stroke-width="2" />
+    
+      <!-- Text -->
+      <text x="50%" y="90%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#222">
+        Walking Tours
+      </text>
+    </svg>
+
+    <mat-nav-list style="width: 250px;">
+      <!-- <a mat-list-item routerLink="/home">Home</a> -->
+      <a mat-list-item routerLink="/circuits">List des circuits</a>
+      <a mat-list-item routerLink="/list-authorized">Demandes d'autorisations</a>
+    </mat-nav-list>
+
+  </mat-drawer>
+  <mat-drawer-content>
+
+    <mat-toolbar color="primary">
       
-        <!-- Map marker pin -->
-        <path d="M50 10 L50 50 L60 60 L50 70 L40 60 L50 50 Z" fill="#FF5722" />
-      
-        <!-- Walking figure body -->
-        <circle cx="35" cy="80" r="5" fill="#FFC107" />
-        <path d="M35 80 L35 65" stroke="#FFC107" stroke-width="2" />
-        <path d="M35 65 L30 60" stroke="#FFC107" stroke-width="2" />
-        <path d="M35 65 L40 60" stroke="#FFC107" stroke-width="2" />
-      
-        <!-- Text -->
-        <text x="50%" y="90%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#222">
-          Walking Tours
-        </text>
-      </svg>
-    <span class="spacer"></span>
-    <!-- <button mat-icon-button>
-      <mat-icon>search</mat-icon>
-    </button> -->
-    <!-- <button mat-icon-button>
-      <mat-icon>notifications</mat-icon>
-    </button> -->
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>account_circle</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <!-- Profile Information -->
-      <button mat-menu-item>
+
+        <button mat-mini-fab color="primary" (click)="drawer.toggle()"><mat-icon>menu</mat-icon></button>
+        
+        <!-- <button style="margin-right:15px" mat-stroked-button color="accent" (click)="redirectToAllArrets()">
+          <mat-icon>list</mat-icon>
+          All arrets
+      </button> -->
+      <span class="spacer"></span>
+      <!-- <button mat-icon-button>
+        <mat-icon>search</mat-icon>
+      </button> -->
+      <!-- <button mat-icon-button>
+        <mat-icon>notifications</mat-icon>
+      </button> -->
+      <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>account_circle</mat-icon>
-        <span>Profile Information</span>
       </button>
-    
-      <!-- Add New Admin -->
-      <button mat-menu-item>
-        <mat-icon>person_add</mat-icon>
-        <span>Add New Admin</span>
-      </button>
-    
-      <!-- List of Admins -->
-      <button mat-menu-item>
-        <mat-icon>people</mat-icon>
-        <span>List of Admins</span>
-      </button>
-    
-      <!-- Log Out -->
-      <button mat-menu-item (click)="logout()">
-        <mat-icon>exit_to_app</mat-icon>
-        <span>Log Out</span>
-      </button>
-    </mat-menu>
-</mat-toolbar>
+      <mat-menu #menu="matMenu">
+        <!-- Profile Information -->
+        <button mat-menu-item>
+          <mat-icon>account_circle</mat-icon>
+          <span>Profile Information</span>
+        </button>
+      
+        <!-- Add New Admin -->
+        <button mat-menu-item>
+          <mat-icon>person_add</mat-icon>
+          <span>Add New Admin</span>
+        </button>
+      
+        <!-- List of Admins -->
+        <button mat-menu-item>
+          <mat-icon>people</mat-icon>
+          <span>List of Admins</span>
+        </button>
+      
+        <!-- Log Out -->
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Log Out</span>
+        </button>
+      </mat-menu>
+  </mat-toolbar>
+
+  <ng-content select="[mainContent]"></ng-content>
+  </mat-drawer-content>
+</mat-drawer-container>

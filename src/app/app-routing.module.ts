@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'arrets/:idCircuit', component: ArretListComponent },
   { path: 'edit-arret/:idCircuit/:id', component: ArretCreateComponent },
   {path  : 'signup' , component :  SignupComponent,},
-  {path  : 'list-autorized' , component :  ListAutorizedComponent,}
+  {path  : 'list-authorized' , component :  ListAutorizedComponent,}
   
 ];
 
