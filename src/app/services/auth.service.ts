@@ -27,27 +27,27 @@ export class AuthService {
   }
 
   createUser(email: string, password: string) {
+    const authdata: AuthData = { email: email, password: password };
+    this.http.post(BACKEND_URL + "/signup", authdata).subscribe(
+        (response: any) => {
+            if (response.token) {
+                // Store the token in local storage
+                //localStorage.setItem('token', response.token);
 
-    const authdata : AuthData  = { email : email , password : password} 
-    this.http.post(BACKEND_URL+"/signup" , authdata)
-    .subscribe( (response : any )=> {
-          console.log(response)
-          if (response.token) {
-            // Store the token in local storage
-            //localStorage.setItem('token', response.token);
-            // Store token expiration timestamp (adjust as needed)
-            //const expirationTime = new Date().getTime() + response.expiresIn * 1000;
-            //.setItem('tokenExpiration', expirationTime.toString());
-  
-            // Redirect to /circuits after successful login
-            //this.router.navigate(['/circuits']);
-          }
-        
-    }, (error : any ) => {
-      return of(error);        
-    })
-  }
+                // Store token expiration timestamp (adjust as needed)
+                //const expirationTime = new Date().getTime() + response.expiresIn * 1000;
+                //localStorage.setItem('tokenExpiration', expirationTime.toString());
 
+                // Redirect to /circuits after successful login
+                //this.router.navigate(['/circuits']);
+            }
+        },
+        (error: any) => {
+            // Handle the error, display a message, or log it for debugging
+            console.error('Error:', error);
+        }
+    );
+}
   // Check if the user is authenticated
   isAuthenticated(): boolean {
     // Check if the token exists and is not expired

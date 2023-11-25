@@ -19,6 +19,7 @@ export class CircuitCreateComponent implements OnInit {
   newCircuit: Circuit = {
     languages: ['Français'],
     mapContent: {} as { lat: number; lng: number }, // Assertion de type
+    showPolyline: false
   } as Circuit;
 
 
@@ -29,6 +30,8 @@ export class CircuitCreateComponent implements OnInit {
   baseUrl = environment.apiUrl;
 
   readonlyMode: boolean = true;
+
+  isPolylineEnabled: boolean = true; // or false, depending on your initial state
 
   constructor(
     private circuitService: CircuitService,
@@ -53,8 +56,12 @@ export class CircuitCreateComponent implements OnInit {
       this.isEditMode = true;
       this.circuitService.getCircuitById(circuitId).subscribe((data: Circuit) => {
         this.newCircuit = data;
+
+        console.log(data)
+        this.isPolylineEnabled = data.showPolyline
         this.existingImageUrl = `${this.baseUrl}/${data.imagePath}`; // Définit l'URL de l'image existante
       });
+      //console.log(this.newCircuit)
     }
   }
 
@@ -106,6 +113,8 @@ export class CircuitCreateComponent implements OnInit {
    * Soumet les données du formulaire.
    */
   onSubmit() {
+    //console.log(this.newCircuit.showPolyline)
+    //this.newCircuit.showPolyline = true
     // En supposant que this.newCircuit.languages est un tableau de chaînes
     const formData = new FormData();
 
@@ -119,6 +128,10 @@ export class CircuitCreateComponent implements OnInit {
 
     if (this.selectedImage)
       formData.append('image', this.selectedImage, this.selectedImage.name);
+
+    this.newCircuit.showPolyline = this.isPolylineEnabled;
+
+    formData.append('showPolyline', this.newCircuit.showPolyline.toString());
 
     if (this.isEditMode)
       this.updateCircuit(formData);
