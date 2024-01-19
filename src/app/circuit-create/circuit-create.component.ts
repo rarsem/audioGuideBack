@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { CircuitService } from '../services/circuit.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Circuit } from '../model/circuit.model';
@@ -28,6 +28,14 @@ export class CircuitCreateComponent implements OnInit {
   selectedImage: File | undefined;
   existingImageUrl: string | null = null; // Initialisez-le à null
   baseUrl = environment.apiUrl;
+  audioPath : string | null = null;
+
+  audioFile : File | undefined;
+
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef;
+  @ViewChild('fileInput') fileInput!: ElementRef ;
+
+  audioFileName: string = '';
 
   readonlyMode: boolean = true;
 
@@ -41,6 +49,29 @@ export class CircuitCreateComponent implements OnInit {
     private location: Location,
     private dialog: MatDialog
   ) { }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+  
+    if (file) {
+      const reader = new FileReader();
+  
+      reader.onload = (e: any) => {
+        this.audioPlayer.nativeElement.src = e.target.result;
+        this.audioFileName = file.name;
+      };
+  
+      reader.readAsDataURL(file);
+      this.audioFile = file;
+      //console.log(this.audioFile)
+    } else {
+      // Clear the audio player when no file is selected
+      this.audioPlayer.nativeElement.src = '';
+      this.audioFileName = '';
+      // Reset the audioFile property
+      this.audioFile = undefined;
+    }
+  }
 
   /**
    * Navigue vers la page précédente.
@@ -60,6 +91,7 @@ export class CircuitCreateComponent implements OnInit {
         console.log(data)
         this.isPolylineEnabled = data.showPolyline
         this.existingImageUrl = `${this.baseUrl}/${data.imagePath}`; // Définit l'URL de l'image existante
+        this.audioPath = `${this.baseUrl}/${data.audioPath}`
       });
       //console.log(this.newCircuit)
     }
@@ -126,12 +158,20 @@ export class CircuitCreateComponent implements OnInit {
     formData.append('mapContentLat', this.newCircuit.mapContent.lat.toString());
     formData.append('mapContentLng', this.newCircuit.mapContent.lng.toString());
 
-    if (this.selectedImage)
-      formData.append('image', this.selectedImage, this.selectedImage.name);
+    if (this.selectedImage) {
+      formData.append('image', this.selectedImage);
+    }
+
+    if(this.audioFile){
+      formData.append('audio', this.audioFile);
+      
+    }
+
+    formData.append('showPolyline', this.newCircuit.showPolyline.toString());
+
 
     this.newCircuit.showPolyline = this.isPolylineEnabled;
 
-    formData.append('showPolyline', this.newCircuit.showPolyline.toString());
 
     if (this.isEditMode)
       this.updateCircuit(formData);

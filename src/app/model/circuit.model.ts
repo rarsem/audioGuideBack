@@ -8,6 +8,7 @@ export interface Circuit {
     distance: number;
     duration: string;
     imagePath: string;
+    audioPath: string;
     mapContent: {
       lat: number;
       lng: number;

@@ -146,7 +146,8 @@ onSubmit() {
   formData.append('mapContentLng', this.newArret.mapContent.lng.toString());
   const circuitId = this.route.snapshot.params['idCircuit'];
   formData.append('idCircuit', circuitId);
-console.log(this.specificDestinations)
+//console.log(this.specificDestinations)
+
   for (const value of this.specificDestinations) {
     formData.append('specificDestinations', `${value.lat},${value.lng}`);
   }

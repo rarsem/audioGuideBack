@@ -36,12 +36,10 @@ export class ListAutorizedComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  pageSize = 10; // Number of items per page
+  pageSize = 20; // Number of items per page
   totalItems = 0; // Total number of items from your data source
 
   @ViewChild(MatTable) myTable!: MatTable<any>;
-
-
 
   constructor(
     private arretService: ArretService, 
