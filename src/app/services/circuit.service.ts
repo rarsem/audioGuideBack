@@ -25,9 +25,9 @@ export class CircuitService {
   }
 
   // Method to fetch circuits data from the API
-  getCircuits(): Observable<{ message: string, circuits: any[], maxPost: number }> {
+  getCircuits(pageIndex: number, pageSize: number): Observable<{ message: string, circuits: any[], totalItems: number }> {
     // Make the HTTP GET request and update the circuits data
-    return this.http.get<{ message: string, circuits: any[], maxPost: number }>(`${BACKEND_URL}`)
+    return this.http.get<{ message: string, circuits: any[], totalItems: number }>(`${BACKEND_URL}?pageIndex=${pageIndex}&pageSize=${pageSize}`)
       .pipe(
         tap(response => {
           // Update the circuits data when the response is received

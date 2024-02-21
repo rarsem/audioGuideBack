@@ -36,7 +36,7 @@ export class ArretService {
         tap(response => {
           // Update the circuits data when the response is received
           this.arrets = response.items;
-          console.log(this.arrets);
+          //console.log(this.arrets);
         })
       );
   }

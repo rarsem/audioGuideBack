@@ -72,8 +72,6 @@ export class ArretListComponent implements OnInit  {
 
   getArretsByIdCircuit(circuitId  : number, pageIndex : number){
     this.arretService.getArretsByCircuitId(circuitId.toString(), pageIndex + 1 , this.pageSize).subscribe((value) => {
-      //console.log(data)
-      //this.arrets = data.;
       this.arrets = value.items;
       this.totalItems = value.totalItems; // Update the total number of items
 

@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CircuitService } from '../services/circuit.service';
 import { Router } from '@angular/router'; // Import the Router module
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth.service';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+
+
 import { Subscription } from 'rxjs';
 
 import {environment}  from "src/environments/environment"
@@ -31,6 +34,11 @@ export class CircuitListComponent implements OnInit {
 
   baseUrl = environment.apiUrl;
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  pageSize = 10; // Number of items per page
+  totalItems = 0; // Total number of items from your data source
+
 
   constructor(private circuitService: CircuitService, private router: Router,
     private snackBar: MatSnackBar, 
@@ -44,15 +52,23 @@ export class CircuitListComponent implements OnInit {
   //     //this.isLoading = false;
   // })
 
-    this.getCircuits();
+    this.getCircuits(0);
   }
 
-  getCircuits(): void {
-    this.circuitService.getCircuits().subscribe(( value ) => {
+  getCircuits(pageIndex : number ): void {
+    this.circuitService.getCircuits(pageIndex + 1, this.pageSize).subscribe(( value ) => {
       //console.log(value)
       this.circuits = value.circuits;
+      this.totalItems = value.totalItems; // Update the total number of items
     });
   }
+
+  onPageChange(event: PageEvent) {
+    const pageIndex = event.pageIndex;
+    this.getCircuits(pageIndex);
+  }
+
+
   // Method to redirect to the New Circuit page
   redirectToAllArrets() {
     this.router.navigate(['/arrets']); // Navigate to the New Circuit page
