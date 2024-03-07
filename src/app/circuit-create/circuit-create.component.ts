@@ -19,7 +19,8 @@ export class CircuitCreateComponent implements OnInit {
   newCircuit: Circuit = {
     languages: ['Français'],
     mapContent: {} as { lat: number; lng: number }, // Assertion de type
-    showPolyline: false
+    showPolyline: false,
+    showMap : false
   } as Circuit;
 
 
@@ -40,6 +41,7 @@ export class CircuitCreateComponent implements OnInit {
   readonlyMode: boolean = true;
 
   isPolylineEnabled: boolean = true; // or false, depending on your initial state
+  isMapEnabled: boolean = true; // or false, depending on your initial state
 
   constructor(
     private circuitService: CircuitService,
@@ -86,10 +88,12 @@ export class CircuitCreateComponent implements OnInit {
       // Modification d'un circuit existant
       this.isEditMode = true;
       this.circuitService.getCircuitById(circuitId).subscribe((data: Circuit) => {
+        console.log(data)
         this.newCircuit = data;
 
         console.log(data)
-        this.isPolylineEnabled = data.showPolyline
+        this.isPolylineEnabled = data.showPolyline,
+        this.isMapEnabled = data.showMap || false
         this.existingImageUrl = `${this.baseUrl}/${data.imagePath}`; // Définit l'URL de l'image existante
         this.audioPath = `${this.baseUrl}/${data.audioPath}`
       });
@@ -148,6 +152,8 @@ export class CircuitCreateComponent implements OnInit {
     //console.log(this.newCircuit.showPolyline)
     //this.newCircuit.showPolyline = true
     // En supposant que this.newCircuit.languages est un tableau de chaînes
+
+    //console.log(this.isMapEnabled, this.newCircuit.showMap)
     const formData = new FormData();
 
     formData.append('title', this.newCircuit.title);
@@ -168,10 +174,10 @@ export class CircuitCreateComponent implements OnInit {
     }
 
     formData.append('showPolyline', this.newCircuit.showPolyline.toString());
-
+    formData.append('showMap', this.isMapEnabled.toString());
 
     this.newCircuit.showPolyline = this.isPolylineEnabled;
-
+    this.newCircuit.showMap = this.isMapEnabled
 
     if (this.isEditMode)
       this.updateCircuit(formData);

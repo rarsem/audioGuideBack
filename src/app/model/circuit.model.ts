@@ -13,5 +13,6 @@ export interface Circuit {
       lat: number;
       lng: number;
     };
-    showPolyline : boolean
+    showPolyline : boolean,
+    showMap : boolean
 }
