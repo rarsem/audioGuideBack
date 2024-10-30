@@ -18,7 +18,7 @@ import { SignupComponent } from './signup/signup.component';
 import { HeaderComponent } from './header/header.component';
 import { ListAutorizedComponent } from './list-autorized/list-autorized.component';
 import { AuthorizationDialogComponent } from './authorization-dialog/authorization-dialog.component';
-
+import { ApiVersionComponent } from './api-version/api-version.component';
 
 
 @NgModule({
@@ -34,7 +34,8 @@ import { AuthorizationDialogComponent } from './authorization-dialog/authorizati
     SignupComponent,
     HeaderComponent,
     ListAutorizedComponent,
-    AuthorizationDialogComponent
+    AuthorizationDialogComponent,
+    ApiVersionComponent
   ],
   imports: [
     BrowserModule,

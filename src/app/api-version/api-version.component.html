@@ -1,0 +1,28 @@
+<mat-card *ngIf="!editMode">
+    <mat-card-title>Current Version</mat-card-title>
+    <mat-card-content>
+      <p><strong>Version:</strong> {{version}}</p>
+      <p><strong>Description:</strong> {{description}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="toggleEditMode()">Update</button>
+    </mat-card-actions>
+  </mat-card>
+  
+  <mat-card *ngIf="editMode">
+    <mat-card-title>Edit Version</mat-card-title>
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Version</mat-label>
+        <input matInput [(ngModel)]="editedVersion">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput [(ngModel)]="editedDescription"></textarea>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="saveChanges()">Save</button>
+      <button mat-button (click)="cancelChanges()">Cancel</button>
+    </mat-card-actions>
+  </mat-card>

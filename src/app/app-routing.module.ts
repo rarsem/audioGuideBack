@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard' ; // Update the path as needed
 import { SignupComponent } from './signup/signup.component';
 import { ListAutorizedComponent } from './list-autorized/list-autorized.component';
+import { ApiVersionComponent } from './api-version/api-version.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect to /circuits by default
@@ -21,8 +22,9 @@ const routes: Routes = [
   { path: 'arrets/:idCircuit', component: ArretListComponent , canActivate: [AuthGuard] },
   { path: 'edit-arret/:idCircuit/:id', component: ArretCreateComponent , canActivate: [AuthGuard] },
   { path  : 'signup' , component :  SignupComponent,},
-  { path  : 'list-authorized' , component :  ListAutorizedComponent , canActivate: [AuthGuard]}
-  
+  { path  : 'list-authorized' , component :  ListAutorizedComponent , canActivate: [AuthGuard]},
+  { path  : 'api-version' , component :  ApiVersionComponent , canActivate: [AuthGuard]},
+
 ];
 
 @NgModule({
