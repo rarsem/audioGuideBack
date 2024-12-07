@@ -58,7 +58,9 @@ export class ArretListComponent implements OnInit  {
 
   onPageChange(event: PageEvent) {
     const pageIndex = event.pageIndex;
-    const circuitId = this.route.snapshot.params['id'];
+    const circuitId = this.route.snapshot.params['idCircuit'];
+
+    console.log( circuitId ,  pageIndex)
     if (circuitId) {
       // Editing an existing circuit
       this.isListByIdCircuit = true;

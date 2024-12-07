@@ -45,6 +45,8 @@ export class ArretService {
   getArretsByCircuitId(circuitId: string , pageIndex: number, pageSize: number): Observable<{ items: any[]; totalItems: number }> {
     //const url = `${this.baseUrl}/api/arrets/${circuitId}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
    // Make the HTTP GET request and update the circuits data
+
+   console.log( circuitId, pageIndex )
    const url = `${BACKEND_URL}/${circuitId}?pageIndex=${pageIndex}&pageSize=${pageSize}`;
    return this.http.get<{ items: any[]; totalItems: number }>(url)
      .pipe(
